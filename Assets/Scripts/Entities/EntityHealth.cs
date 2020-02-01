@@ -15,9 +15,6 @@ public class EntityHealth : MonoBehaviour
 
     private int previousHealth;
 
-    [Header("Is this the player?")]
-    [SerializeField] private bool isPlayer;
-
     [Header("Events")]
     [SerializeField] UnityEvent eventPlayerDied;
     [SerializeField] UnityEvent eventEnemyDied;
@@ -27,6 +24,10 @@ public class EntityHealth : MonoBehaviour
 
     public static event Action<int> Action_PlayerHealthChanged = delegate { };
     public static event Action Action_PlayerDied= delegate { };
+
+
+
+
 
 
     /// <summary>

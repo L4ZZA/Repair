@@ -13,7 +13,7 @@ public class EntityProjectile : MonoBehaviour
 
     [Header("Collider / Rigidbody")]
     [SerializeField] private Collider2D collider;
-    [SerializeField] private Rigidbody2D rigidBody;
+    [SerializeField] private Rigidbody2D rb;
 
 
 
@@ -29,11 +29,11 @@ public class EntityProjectile : MonoBehaviour
             }
         }
 
-        if (rigidBody == null)
+        if (rb == null)
         {
-            rigidBody = GetComponent<Rigidbody2D>();
+            rb = GetComponent<Rigidbody2D>();
 
-            if (rigidBody == null)
+            if (rb == null)
             {
                 Debug.LogError(this + ": you must assign rigidBody.");
             }
@@ -46,21 +46,21 @@ public class EntityProjectile : MonoBehaviour
     }
 
 
-    public void FireProjectileForward(Transform _transform)
+    public void FireProjectileForward()
     {
-        if (rigidBody != null)
+        if (rb != null)
         {
-            rigidBody.AddForce(_transform.forward * force);
+            Debug.Log("Force applied: " + transform.up);
+            rb.AddForce(transform.up * force);
         }
     }
 
 
-    public void FireProjectileAtTarget(RaycastHit2D _ray)
+    public void FireProjectileAtTarget(Vector3 _direction)
     {
-        if (rigidBody != null)
+        if (rb != null)
         {
-            Debug.Log("Force applied");
-            rigidBody.AddForce(_ray.point * force);
+            rb.AddForce(_direction * force);
         }
     }
 
@@ -81,6 +81,7 @@ public class EntityProjectile : MonoBehaviour
                     if ((layer & 1 << gameObj.layer) == 1 << gameObj.layer)
                     {
                         DealDamage(entityHealth, damage);
+                        Destroy(this);
                     }
                 }
             }
