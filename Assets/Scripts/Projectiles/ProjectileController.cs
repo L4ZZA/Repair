@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,14 +16,15 @@ public class ProjectileController : MonoBehaviour
     [Header("Target sprite")]
     [SerializeField] private SpriteRenderer targetSprite;
 
-    private Vector3 mLastMousePos;
-    private float mRotation;
+    [SerializeField]
+    public Transform orb;
+
+    [SerializeField] public float radius;
+
+    private Transform pivot;
 
     private void Awake()
     {
-        mLastMousePos = Input.mousePosition;
-        mRotation = 0f;
-        Debug.Log("AWAKE - rotation: " + mRotation);
         if (projectilePrefab == null)
         {
             Debug.LogError(this + ": must added projectile.");
@@ -35,9 +36,22 @@ public class ProjectileController : MonoBehaviour
         }
     }
 
-    private void Update()
+    void Start()
     {
-        Rotate();
+        pivot = orb.transform;
+        transform.parent = pivot;
+        transform.position += Vector3.up * radius;
+    }
+
+    void Update()
+    {
+        Vector3 orbVector = Camera.main.WorldToScreenPoint(orb.position);
+        orbVector = Input.mousePosition - orbVector;
+        float angle = Mathf.Atan2(orbVector.y, orbVector.x) * Mathf.Rad2Deg;
+
+        pivot.position = orb.position;
+        pivot.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+
         SetTargetPosition();
 
         if (Input.GetMouseButtonDown(0))
@@ -60,29 +74,6 @@ public class ProjectileController : MonoBehaviour
             //targetSprite.gameObject.transform.rotation = Quaternion.FromToRotation(transform.up, Input.mousePosition);
         }
     }
-
-    private void Rotate()
-    {
-         
-         //Get the Screen positions of the object
-         Vector2 positionOnScreen = Camera.main.WorldToViewportPoint (transform.position);
-         
-         //Get the Screen position of the mouse
-         Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
-         
-         //Get the angle between the points
-         float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
-
-        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.rotation = Quaternion.LookRotation(transform.position - mousePosition, Vector3.forward);
-
-        //Ta Daaa
-        //transform.rotation =  Quaternion.Euler (new Vector3(0f,0f,angle));
-     }
- 
-     float AngleBetweenTwoPoints(Vector3 a, Vector3 b) {
-         return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
-     }
     
     public void SpawnProjectileAtTarget(Vector3 _playerDirection)
     {
