@@ -1,0 +1,31 @@
+fileFormatVersion: 2
+guid: b39d8014d65f66848920940f1c743883
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Tomorrow
+  fontNames:
+  - Tomorrow
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 8a392ea31cb0faf47b14925215592d2f, type: 3}
+  - {fileID: 12800000, guid: aeec97c383bcde948aa7ed5bf2698ab4, type: 3}
+  - {fileID: 12800000, guid: 2c7e2635db769f449b396229490cfd72, type: 3}
+  - {fileID: 12800000, guid: ace91e75d06b5ae44a9c6de9984864f2, type: 3}
+  - {fileID: 12800000, guid: a8395f7655fbd91448fd3f8ffef10890, type: 3}
+  - {fileID: 12800000, guid: 2072ac492339d13458a7a118a290cc00, type: 3}
+  - {fileID: 12800000, guid: 85771b3b923f58e48a2089a7be107aa3, type: 3}
+  - {fileID: 12800000, guid: 1f568a2c7783a104c8f666dbba7cbc4a, type: 3}
+  - {fileID: 12800000, guid: 1b7ad20f051ef6244bc640f68cc376dc, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
