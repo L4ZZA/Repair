@@ -11,7 +11,10 @@ public class EntityHealth : MonoBehaviour
 
     [Header("Health")]
     [SerializeField] private int health = 100;
-    [SerializeField] private int maxHealth = 100;
+    private int maxHealth;
+
+    [Header("Score (if destroyed)")]
+    [SerializeField] private int score = 0;
 
     private int previousHealth;
 
@@ -22,13 +25,19 @@ public class EntityHealth : MonoBehaviour
     [SerializeField] UnityEvent eventHealed;
     [SerializeField] UnityEvent eventDamaged;
 
+    [SerializeField] UnityEventDoubleInt eventEjectHealth;
+
     public static event Action<int> Action_PlayerHealthChanged = delegate { };
     public static event Action Action_PlayerDied= delegate { };
 
+    public static event Action<int> Action_EnemyDied = delegate { };
+    public static event Action Action_EnvironmentDied = delegate { };
 
 
-
-
+    private void Awake()
+    {
+        maxHealth = health;
+    }
 
     /// <summary>
     /// External scripts change health via this function.
@@ -61,13 +70,13 @@ public class EntityHealth : MonoBehaviour
             // Check is environment object
             else if (entityType == Entities.EntityType.environment)
             {
-                eventEnvironmentDied.Invoke();
+                EnvironmentDied();
             }
 
             // Otherwise, must be enemy
             else
             {
-                eventEnemyDied.Invoke();
+                EnemyDied();
             }
         }
 
@@ -76,14 +85,18 @@ public class EntityHealth : MonoBehaviour
             // If health is less than before, it was damaged
             if (_health < previousHealth)
             {
+                Debug.Log("Damaged");
                 eventDamaged.Invoke();
             }
 
             // Otherwise, it was healed
             else
             {
+                Debug.Log("Healed");
                 eventHealed.Invoke();
             }
+
+            eventEjectHealth.Invoke(health, maxHealth);
         }
     }
 
@@ -100,4 +113,21 @@ public class EntityHealth : MonoBehaviour
     }
 
 
+    private void EnvironmentDied()
+    {
+        eventEnvironmentDied.Invoke();
+        Action_EnvironmentDied.Invoke();
+    }
+
+    private void EnemyDied()
+    {        
+        eventEnemyDied.Invoke();
+        Action_EnemyDied.Invoke(score);
+    }
+
 }
+
+
+
+[System.Serializable]
+public class UnityEventDoubleInt : UnityEvent<int, int>{ }
