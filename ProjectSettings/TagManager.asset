@@ -16,10 +16,10 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Environment
+  - Enemy
+  - Projectile
   - 
   - 
   - 
