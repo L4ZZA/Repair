@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2094876110288100079}
   - component: {fileID: -6214922999334777571}
   - component: {fileID: -6561258298170949401}
+  - component: {fileID: -3598521383541590096}
   m_Layer: 13
   m_Name: enemy_1
   m_TagString: Untagged
@@ -112,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  moveSpeed: 3
+  moveSpeed: 1.5
   targetAcquired: 0
 --- !u!58 &2094876110288100079
 CircleCollider2D:
@@ -190,3 +191,16 @@ MonoBehaviour:
   eventEjectHealth:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-3598521383541590096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6208036562459511236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac36c54a2ed3e341b1d613705862dff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hideOnGameOver: 1

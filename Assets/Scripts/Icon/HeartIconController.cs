@@ -37,8 +37,8 @@ public class HeartIconController : MonoBehaviour
 
     public void ChangeHealthSlider(int _health, int _maxHealth)
     {
-        Debug.Log("_health: " + _health);
-        Debug.Log("_maxHealth: " + _maxHealth);
+        Debug.Log("Health: " + _health);
+
         float health = (float) _health;
         float maxHealth = (float)_maxHealth;
 
@@ -56,8 +56,10 @@ public class HeartIconController : MonoBehaviour
     {
         if (slider != null)
         {
-            
-            slider.value = Mathf.Clamp(_value, 0, 100);
+            if (_value >= 0)
+            {
+                slider.value = _value;
+            }
         }
 
         else Debug.LogWarning(this + "slider not assigned. Can't change.");

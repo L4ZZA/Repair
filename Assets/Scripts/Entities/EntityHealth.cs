@@ -81,8 +81,17 @@ public class EntityHealth : MonoBehaviour
         // Store previous health before changing
         previousHealth = health;
 
-        // Limit range of health
-        health = Mathf.Clamp(health -= _damage, 0, maxHealth);
+        health -= _damage;
+
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+
+        if (health < 0)
+        {
+            health = 0;
+        }
 
         CheckHealth(health);
     }
@@ -131,6 +140,11 @@ public class EntityHealth : MonoBehaviour
             {
                 Debug.Log("Healed");
                 eventHealed.Invoke();
+            }
+
+            if (entityType == Entities.EntityType.player)
+            {
+                PlayerHealthChanged();
             }
 
             eventEjectHealth.Invoke(health, maxHealth);

@@ -42,6 +42,8 @@ public class HUDController : MonoBehaviour
         ScoreController.Action_UpdatedHUDScore += ChangeScoreText;
         ScoreController.Action_ChangeTime += ChangeTimer;
         ScoreController.Action_GameOver += ChangeGameOverText;
+
+        EntityHealth.Action_PlayerHealthChanged += ChangeHealthSlider;
     }
 
 
@@ -50,6 +52,8 @@ public class HUDController : MonoBehaviour
         ScoreController.Action_UpdatedHUDScore -= ChangeScoreText;
         ScoreController.Action_ChangeTime -= ChangeTimer;
         ScoreController.Action_GameOver -= ChangeGameOverText;
+
+        EntityHealth.Action_PlayerHealthChanged -= ChangeHealthSlider;
     }
 
 
@@ -65,6 +69,16 @@ public class HUDController : MonoBehaviour
     }
 
 
+    private void ChangeHealthSlider(int _value)
+    {
+        if (playerHealth != null)
+        {
+
+            playerHealth.value = Mathf.Clamp(_value, 0, 100);
+        }
+
+        else Debug.LogWarning(this + "slider not assigned. Can't change.");
+    }
 
 
     public void ChangeTimer(string _timer)

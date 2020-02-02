@@ -62,6 +62,16 @@ public class ProjectileController : MonoBehaviour
         if (Input.GetKeyDown(weaponButton))
         {
             repairBulletSelected = !repairBulletSelected;
+
+            if (repairBulletSelected)
+            {
+                ChangePillDirection(pillSpriteObject, 0);
+            }
+            else
+            {
+                ChangePillDirection(pillSpriteObject, 180);
+            }
+            
         }
     }
     
@@ -77,14 +87,12 @@ public class ProjectileController : MonoBehaviour
                 if (repairBulletSelected)
                 {
                     entityProjectile.ChangeBulletToRepair();
-                    ChangePillDirection(pillSpriteObject, 0);
-
                 }
 
                 else
                 {
                     entityProjectile.ChangeBulletToDamage();
-                    ChangePillDirection(pillSpriteObject, 180);
+                    
                 }
 
                 entityProjectile.FireProjectileAtTarget(_playerDirection);

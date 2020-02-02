@@ -64,6 +64,7 @@ public class ScoreController : MonoBehaviour
     {
         playerScore = 0;
         Action_EnvironmentDestroyed.Invoke();
+        GameOver();
     }
 
 
