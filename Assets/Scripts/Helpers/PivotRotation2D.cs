@@ -7,17 +7,16 @@ public class PivotRotation2D : MonoBehaviour
     [SerializeField]
     public Transform TargetToLookAt;
 
-    [SerializeField] 
+    [SerializeField]
     public bool followMouse = false;
 
     void Start()
     {
         if (!TargetToLookAt)
         {
-            Debug.Log("NO TARGET");
             followMouse = true;
         }
- 
+
     }
 
     void Update()
@@ -33,12 +32,8 @@ public class PivotRotation2D : MonoBehaviour
             pivotVector = TargetToLookAt.position - transform.position;
         }
 
-        //PivotVector.Normalize();
+        pivotVector.Normalize();
         float angle = Mathf.Atan2(pivotVector.y, pivotVector.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-        if (!followMouse)
-        {
-            Debug.Log("angle: " + angle + "Origin: " + transform.position + " - Target:" + TargetToLookAt.position);
-        }
+        transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
     }
 }
