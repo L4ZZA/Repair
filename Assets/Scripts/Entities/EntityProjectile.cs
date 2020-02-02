@@ -65,7 +65,6 @@ public class EntityProjectile : MonoBehaviour
     }
 
 
-
     public void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject gameObj = collision.gameObject;

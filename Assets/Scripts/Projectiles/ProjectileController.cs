@@ -56,11 +56,7 @@ public class ProjectileController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 mouse = Input.mousePosition;
-
-            var playerDirection = (mouse - transform.position).normalized;
-
-            SpawnProjectileAtTarget(playerDirection);
+            SpawnProjectileAtTarget(orbVector.normalized);
         }
     }
 
@@ -79,7 +75,7 @@ public class ProjectileController : MonoBehaviour
     {
         if (projectilePrefab != null)
         {
-            GameObject projectileObject = Instantiate(projectilePrefab, firingPosition.transform.position, Quaternion.identity);
+            GameObject projectileObject = Instantiate(projectilePrefab, firingPosition.transform.position, pivot.rotation);
             EntityProjectile entityProjectile = projectileObject.GetComponent<EntityProjectile>();
 
             if (entityProjectile != null)
