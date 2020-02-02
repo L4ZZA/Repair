@@ -12,11 +12,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            pos.x += speed * Time.deltaTime;
+            pos.y += speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            pos.x -= speed * Time.deltaTime;
+            pos.y -= speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.D))
         {

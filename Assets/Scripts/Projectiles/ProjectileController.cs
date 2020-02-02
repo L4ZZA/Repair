@@ -4,24 +4,19 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
-    [Header("Projectile prefab")]
-    [SerializeField] private GameObject projectilePrefab;
+    
+    [SerializeField] 
+    private GameObject projectilePrefab;
+    
+    [SerializeField] 
+    private GameObject firingPosition;
+    
+    [SerializeField] 
+    private SpriteRenderer targetSprite;
 
-    [Header("Firing position")]
-    [SerializeField] private GameObject firingPosition;
-
-    [Header("Rotation speed")]
-    [SerializeField] private float rotationSpeed;
-
-    [Header("Target sprite")]
-    [SerializeField] private SpriteRenderer targetSprite;
-
+    [Header("Object Transform")]
     [SerializeField]
-    public Transform orb;
-
-    [SerializeField] public float radius;
-
-    private Transform pivot;
+    public Transform Origin;
 
     private void Awake()
     {
@@ -38,52 +33,43 @@ public class ProjectileController : MonoBehaviour
 
     void Start()
     {
-        pivot = orb.transform;
-        transform.parent = pivot;
-        transform.position += Vector3.up * radius;
+        transform.parent = Origin.transform;
     }
 
     void Update()
     {
-        Vector3 orbVector = Camera.main.WorldToScreenPoint(orb.position);
-        orbVector = Input.mousePosition - orbVector;
-        float angle = Mathf.Atan2(orbVector.y, orbVector.x) * Mathf.Rad2Deg;
+        Vector3 OriginVector = Camera.main.WorldToScreenPoint(Origin.position);
+        OriginVector = Input.mousePosition - OriginVector;
+        float angle = Mathf.Atan2(OriginVector.y, OriginVector.x) * Mathf.Rad2Deg;
 
-        pivot.position = orb.position;
-        pivot.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        Origin.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
 
-        SetTargetPosition();
 
         if (Input.GetMouseButtonDown(0))
         {
-            SpawnProjectileAtTarget(orbVector.normalized);
-        }
-    }
-
-    private void SetTargetPosition()
-    {
-        if (targetSprite != null)
-        {
-            Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
-            targetSprite.gameObject.transform.position = mousePos;
-
-            //targetSprite.gameObject.transform.rotation = Quaternion.FromToRotation(transform.up, Input.mousePosition);
+            SpawnProjectileAtTarget(OriginVector.normalized);
         }
     }
     
     public void SpawnProjectileAtTarget(Vector3 _playerDirection)
     {
-        if (projectilePrefab != null)
+        if (projectilePrefab)
         {
-            GameObject projectileObject = Instantiate(projectilePrefab, firingPosition.transform.position, pivot.rotation);
+            GameObject projectileObject = Instantiate(projectilePrefab, firingPosition.transform.position, Origin.rotation);
             EntityProjectile entityProjectile = projectileObject.GetComponent<EntityProjectile>();
 
-            if (entityProjectile != null)
+            if (entityProjectile)
             {
                 entityProjectile.FireProjectileAtTarget(_playerDirection);
             }
-
-            else Debug.Log(this + ": EntityProjectile was not found on this prefab.");
+            else
+            {
+                Debug.Log(this + ": EntityProjectile was not found on this prefab.");
+            }
+        }
+        else
+        {
+            Debug.Log("projectilePrefab not null");
         }
     }
 
