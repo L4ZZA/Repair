@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileController : MonoBehaviour
+public class PivotRotation2D : MonoBehaviour
 {
     //[Header("Projectile prefab")]
     //[SerializeField] private GameObject projectilePrefab;
@@ -39,10 +39,11 @@ public class ProjectileController : MonoBehaviour
     {
         Vector3 PivotVector = Camera.main.WorldToScreenPoint(Pivot.position);
         if (followMouse)
+        {
             PivotVector = Input.mousePosition - PivotVector;
+        }
         else
         {
-            Debug.Log("---" + TargetToLookAt.position);
             PivotVector = TargetToLookAt.position - PivotVector;
         }
         float angle = Mathf.Atan2(PivotVector.y, PivotVector.x) * Mathf.Rad2Deg;
