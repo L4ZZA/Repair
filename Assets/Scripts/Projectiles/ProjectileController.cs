@@ -18,8 +18,17 @@ public class ProjectileController : MonoBehaviour
     [SerializeField]
     public Transform Origin;
 
+    [SerializeField]
+    private GameObject pillSpriteObject;
+    private bool repairBulletSelected;
+
+    [Header("Change Weapons")]
+    [SerializeField] KeyCode weaponButton = KeyCode.LeftShift;
+
     private void Awake()
     {
+        repairBulletSelected = true;
+
         if (projectilePrefab == null)
         {
             Debug.LogError(this + ": must added projectile.");
@@ -49,6 +58,11 @@ public class ProjectileController : MonoBehaviour
         {
             SpawnProjectileAtTarget(OriginVector.normalized);
         }
+
+        if (Input.GetKeyDown(weaponButton))
+        {
+            repairBulletSelected = !repairBulletSelected;
+        }
     }
     
     public void SpawnProjectileAtTarget(Vector3 _playerDirection)
@@ -60,6 +74,19 @@ public class ProjectileController : MonoBehaviour
 
             if (entityProjectile)
             {
+                if (repairBulletSelected)
+                {
+                    entityProjectile.ChangeBulletToRepair();
+                    ChangePillDirection(pillSpriteObject, 0);
+
+                }
+
+                else
+                {
+                    entityProjectile.ChangeBulletToDamage();
+                    ChangePillDirection(pillSpriteObject, 180);
+                }
+
                 entityProjectile.FireProjectileAtTarget(_playerDirection);
             }
             else
@@ -74,4 +101,13 @@ public class ProjectileController : MonoBehaviour
     }
 
 
+    private void ChangePillDirection(GameObject _gameObject, float _rotation)
+    {
+        if (_gameObject)
+        {
+            _gameObject.transform.localRotation = Quaternion.Euler(0, 0, _rotation);
+        }
+
+        else Debug.Log(this + "_gameObject is null.");
+    }
 }

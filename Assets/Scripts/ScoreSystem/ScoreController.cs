@@ -26,6 +26,7 @@ public class ScoreController : MonoBehaviour
     private void Awake()
     {
         startTimer = timer;
+        Time.timeScale = 1;
     }
 
 
@@ -33,6 +34,8 @@ public class ScoreController : MonoBehaviour
     {
         EntityHealth.Action_EnvironmentDied += EnvironmentDestroyed;
         EntityHealth.Action_EnemyDied += ChangePlayerScore;
+        EntityHealth.Action_PlayerDied += GameOver;
+        
     }
 
 
@@ -40,6 +43,7 @@ public class ScoreController : MonoBehaviour
     {
         EntityHealth.Action_EnvironmentDied -= EnvironmentDestroyed;
         EntityHealth.Action_EnemyDied -= ChangePlayerScore;
+        EntityHealth.Action_PlayerDied -= GameOver;
     }
 
 
@@ -93,5 +97,6 @@ public class ScoreController : MonoBehaviour
     private void GameOver()
     {
         Action_GameOver.Invoke("Game over!");
+        Time.timeScale = 0;
     }
 }

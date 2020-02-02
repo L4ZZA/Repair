@@ -10,7 +10,7 @@ public class SpawnController : MonoBehaviour
     [Header("Spawn points")]
     [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
 
-    private List<GameObject> enemies = new List<GameObject>();
+    private List<EntitySpawnAmount> enemies = new List<EntitySpawnAmount>();
 
     [Header("Spawn delays")]
     [SerializeField] private float delayMin = 0.25f;
@@ -53,7 +53,7 @@ public class SpawnController : MonoBehaviour
             {
                 if (entityToSpawn[i].entityType != null)
                 {
-                    enemies.Add(entityToSpawn[i].entityType);
+                    enemies.Add(entityToSpawn[i]);
                 }
 
                 else Debug.LogWarning(this + ": you must add prefabs to spawn.");
@@ -64,7 +64,7 @@ public class SpawnController : MonoBehaviour
     }
 
 
-    public void Shuffle(List<GameObject> _list)
+    public void Shuffle(List<EntitySpawnAmount> _list)
     {
         var count = _list.Count;
         var last = count - 1;
@@ -102,7 +102,10 @@ public class SpawnController : MonoBehaviour
                 {
                     yield return new WaitForSeconds(CalculateSpawnDelay());
 
-                    SpawnEnemy(enemies[spawnIndex], ChooseSpawnPosition(), this.transform.rotation);
+                    GameObject newEnemy = SpawnEnemy(enemies[spawnIndex].entityType, ChooseSpawnPosition(), this.transform.rotation);
+                    
+                    EnemyAI enemyAI = newEnemy.GetComponent<EnemyAI>();
+                    enemyAI.target = enemies[spawnIndex].targetTransform;
 
                     spawnIndex += 1;
                 }
@@ -147,9 +150,10 @@ public class SpawnController : MonoBehaviour
         }
     }
 
-    private void SpawnEnemy(GameObject _gameObject, Vector3 _position, Quaternion _rotation)
+    private GameObject SpawnEnemy(GameObject _gameObject, Vector3 _position, Quaternion _rotation)
     {
-        Instantiate(_gameObject, _position, _rotation);
+        GameObject gameObject = Instantiate(_gameObject, _position, _rotation);
+        return gameObject;
     }
 
 }

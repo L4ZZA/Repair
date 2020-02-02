@@ -13,8 +13,16 @@ public class EntityHealth : MonoBehaviour
     [SerializeField] private int health = 100;
     private int maxHealth;
 
+    [Header("Damage upon impact")]
+    [SerializeField] private int damage;
+
+    [Header("Destroy layer if touched")]
+    [SerializeField] private List<LayerMask> layersCanAffect = new List<LayerMask>();
+
     [Header("Score (if destroyed)")]
     [SerializeField] private int score = 0;
+
+
 
     private int previousHealth;
 
@@ -38,6 +46,32 @@ public class EntityHealth : MonoBehaviour
     {
         maxHealth = health;
     }
+
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (layersCanAffect.Count > 0)
+                {
+            GameObject gameObj = collision.gameObject;
+
+            EntityHealth entityHealth = gameObj.GetComponent<EntityHealth>();
+
+            if (entityHealth != null)
+            {
+                foreach (var layer in layersCanAffect)
+                {
+                    if ((layer & 1 << gameObj.layer) == 1 << gameObj.layer)
+                    {
+                        DealDamage(entityHealth, damage);
+                        Destroy(this.gameObject);
+                    }
+                }
+            }
+        }
+    }
+
+
+
 
     /// <summary>
     /// External scripts change health via this function.
@@ -64,7 +98,7 @@ public class EntityHealth : MonoBehaviour
             // Check is player
             if (entityType == Entities.EntityType.player)
             {
-                eventPlayerDied.Invoke();
+                PlayerDied();
             }
 
             // Check is environment object
@@ -77,7 +111,10 @@ public class EntityHealth : MonoBehaviour
             else
             {
                 EnemyDied();
+                
             }
+
+            
         }
 
         else
@@ -99,6 +136,11 @@ public class EntityHealth : MonoBehaviour
             eventEjectHealth.Invoke(health, maxHealth);
         }
     }
+    private void DealDamage(EntityHealth _entityHealth, int _damage)
+    {
+        _entityHealth.ChangeHealth(_damage);
+    }
+
 
 
     private void PlayerHealthChanged()
@@ -109,6 +151,7 @@ public class EntityHealth : MonoBehaviour
 
     private void PlayerDied()
     {
+        Destroy(this.gameObject);
         Action_PlayerDied.Invoke();
     }
 
@@ -120,7 +163,8 @@ public class EntityHealth : MonoBehaviour
     }
 
     private void EnemyDied()
-    {        
+    {
+        Destroy(this.gameObject);
         eventEnemyDied.Invoke();
         Action_EnemyDied.Invoke(score);
     }

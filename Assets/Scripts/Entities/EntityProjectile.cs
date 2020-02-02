@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EntityProjectile : MonoBehaviour
 {
@@ -8,12 +9,20 @@ public class EntityProjectile : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float force;
 
+    private bool canDamageEntities;
+
+    [Header("Sprites")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite projectileDamage;
+    [SerializeField] private Sprite projectileRepair;
+
     [Header("Which layers to repair/damage?")]
     [SerializeField] private List<LayerMask> layersCanAffect = new List<LayerMask>();
 
     [Header("Collider / Rigidbody")]
     [SerializeField] private Collider2D collider;
     [SerializeField] private Rigidbody2D rb;
+
 
 
 
@@ -65,6 +74,20 @@ public class EntityProjectile : MonoBehaviour
     }
 
 
+    public void ChangeBulletToDamage()
+    {
+        ChangeSprite(spriteRenderer, projectileDamage);
+        canDamageEntities = true;
+    }
+
+
+    public void ChangeBulletToRepair()
+    {
+        ChangeSprite(spriteRenderer, projectileRepair);
+        canDamageEntities = false;
+    }
+
+
     public void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject gameObj = collision.gameObject;
@@ -79,8 +102,17 @@ public class EntityProjectile : MonoBehaviour
                 {
                     if ((layer & 1 << gameObj.layer) == 1 << gameObj.layer)
                     {
-                        DealDamage(entityHealth, damage);
-                        Destroy(this);
+                        if (canDamageEntities)
+                        {
+                            DealDamage(entityHealth, damage);
+                        }
+
+                        else
+                        {
+                            DealDamage(entityHealth, -damage);
+                        }
+                        
+                        Destroy(this.gameObject);
                     }
                 }
             }
@@ -91,5 +123,22 @@ public class EntityProjectile : MonoBehaviour
     private void DealDamage(EntityHealth _entityHealth, int _damage)
     {
         _entityHealth.ChangeHealth(_damage);
+    }
+
+
+    private void ChangeSprite(SpriteRenderer _spriteRenderer, Sprite _sprite)
+    {
+        if (_spriteRenderer != null)
+        {
+            if (_sprite != null)
+            {
+                _spriteRenderer.sprite = _sprite;
+            }
+
+            else Debug.LogWarning(this + "sprite not assigned. Can't change.");
+
+        }
+
+        else Debug.LogWarning(this + "spriteRenderer not assigned. Can't change.");
     }
 }

@@ -8,4 +8,5 @@ public class EntitySpawnAmount
 {
     public GameObject entityType;
     public int quantityToSpawn;
+    public Transform targetTransform;
 }
