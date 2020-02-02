@@ -5,9 +5,6 @@ using UnityEngine;
 public class PivotRotation2D : MonoBehaviour
 {
     [SerializeField]
-    public Transform Pivot;
-
-    [SerializeField]
     public Transform TargetToLookAt;
 
     [SerializeField] 
@@ -16,24 +13,32 @@ public class PivotRotation2D : MonoBehaviour
     void Start()
     {
         if (!TargetToLookAt)
+        {
+            Debug.Log("NO TARGET");
             followMouse = true;
-
-        transform.parent = Pivot.transform;
+        }
+ 
     }
 
     void Update()
     {
-        Vector3 PivotVector = Camera.main.WorldToScreenPoint(Pivot.position);
+        Vector3 pivotVector;
         if (followMouse)
         {
-            PivotVector = Input.mousePosition - PivotVector;
+            pivotVector = Camera.main.WorldToScreenPoint(transform.position);
+            pivotVector = Input.mousePosition - pivotVector;
         }
         else
         {
-            PivotVector = TargetToLookAt.position - PivotVector;
+            pivotVector = TargetToLookAt.position - transform.position;
         }
 
-        float angle = Mathf.Atan2(PivotVector.y, PivotVector.x) * Mathf.Rad2Deg;
-        Pivot.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        //PivotVector.Normalize();
+        float angle = Mathf.Atan2(pivotVector.y, pivotVector.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        if (!followMouse)
+        {
+            Debug.Log("angle: " + angle + "Origin: " + transform.position + " - Target:" + TargetToLookAt.position);
+        }
     }
 }

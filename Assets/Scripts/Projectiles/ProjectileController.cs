@@ -44,35 +44,22 @@ public class ProjectileController : MonoBehaviour
 
         Origin.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
 
-        SetTargetPosition();
 
         if (Input.GetMouseButtonDown(0))
         {
             SpawnProjectileAtTarget(OriginVector.normalized);
         }
     }
-
-    private void SetTargetPosition()
-    {
-        if (targetSprite != null)
-        {
-            Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
-            targetSprite.gameObject.transform.position = mousePos;
-            targetSprite.gameObject.transform.rotation = Quaternion.FromToRotation(transform.up, mousePos);
-        }
-    }
     
     public void SpawnProjectileAtTarget(Vector3 _playerDirection)
     {
-        if (projectilePrefab != null)
+        if (projectilePrefab)
         {
-            Debug.Log("projectilePrefab not null");
             GameObject projectileObject = Instantiate(projectilePrefab, firingPosition.transform.position, Origin.rotation);
             EntityProjectile entityProjectile = projectileObject.GetComponent<EntityProjectile>();
 
-            if (entityProjectile != null)
+            if (entityProjectile)
             {
-                Debug.Log("entityProjectile not null");
                 entityProjectile.FireProjectileAtTarget(_playerDirection);
             }
             else
