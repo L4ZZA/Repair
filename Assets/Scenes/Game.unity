@@ -720,18 +720,37 @@ MonoBehaviour:
   finalScoreText: {fileID: 1935559102}
   buttonRestart: {fileID: 1031180256}
   buttonExit: {fileID: 873831680}
+--- !u!1 &580109387 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3946675093325178200, guid: 0b4c3266076aaa84990d953d4cb79dd8,
+    type: 3}
+  m_PrefabInstance: {fileID: 3946675093888082195}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &580109388 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 580109388, guid: 0b4c3266076aaa84990d953d4cb79dd8,
     type: 3}
   m_PrefabInstance: {fileID: 3946675093888082195}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 580109387}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8575d73af8138844b5b297114ca2d6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &580109389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580109387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac36c54a2ed3e341b1d613705862dff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hideOnGameOver: 1
 --- !u!1 &654117361
 GameObject:
   m_ObjectHideFlags: 0
@@ -2068,6 +2087,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: heart_prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946675093325178200, guid: 0b4c3266076aaa84990d953d4cb79dd8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3946675093325178205, guid: 0b4c3266076aaa84990d953d4cb79dd8,
         type: 3}
