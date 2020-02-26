@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 
 public class ScoreController : MonoBehaviour
@@ -35,7 +33,6 @@ public class ScoreController : MonoBehaviour
         EntityHealth.Action_EnvironmentDied += EnvironmentDestroyed;
         EntityHealth.Action_EnemyDied += ChangePlayerScore;
         EntityHealth.Action_PlayerDied += GameOver;
-        
     }
 
 
@@ -90,8 +87,10 @@ public class ScoreController : MonoBehaviour
         {
             Action_ChangeTime.Invoke(_string);
         }
-
-        else GameOver();
+        else
+        {
+            GameOver();
+        }
     }
 
 

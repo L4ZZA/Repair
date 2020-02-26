@@ -24,8 +24,6 @@ public class EntityProjectile : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
 
 
-
-
     private void Awake()
     {
         if (collider == null)
@@ -96,24 +94,20 @@ public class EntityProjectile : MonoBehaviour
 
         if (entityHealth != null)
         {
-            if (layersCanAffect.Count > 0)
+            foreach (LayerMask layer in layersCanAffect)
             {
-                foreach (var layer in layersCanAffect)
+                if ((layer & 1 << gameObj.layer) == 1 << gameObj.layer)
                 {
-                    if ((layer & 1 << gameObj.layer) == 1 << gameObj.layer)
+                    if (canDamageEntities)
                     {
-                        if (canDamageEntities)
-                        {
-                            DealDamage(entityHealth, damage);
-                        }
-
-                        else
-                        {
-                            DealDamage(entityHealth, -damage);
-                        }
-                        
-                        Destroy(this.gameObject);
+                        DealDamage(entityHealth, damage);
                     }
+                    else
+                    {
+                        DealDamage(entityHealth, -damage);
+                    }
+
+                    Destroy(this.gameObject);
                 }
             }
         }

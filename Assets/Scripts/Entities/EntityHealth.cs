@@ -1,8 +1,7 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using System;
 
 public class EntityHealth : MonoBehaviour
 {
@@ -36,7 +35,7 @@ public class EntityHealth : MonoBehaviour
     [SerializeField] UnityEventDoubleInt eventEjectHealth;
 
     public static event Action<int> Action_PlayerHealthChanged = delegate { };
-    public static event Action Action_PlayerDied= delegate { };
+    public static event Action Action_PlayerDied = delegate { };
 
     public static event Action<int> Action_EnemyDied = delegate { };
     public static event Action Action_EnvironmentDied = delegate { };
@@ -51,14 +50,14 @@ public class EntityHealth : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (layersCanAffect.Count > 0)
-                {
+        {
             GameObject gameObj = collision.gameObject;
 
             EntityHealth entityHealth = gameObj.GetComponent<EntityHealth>();
 
-            if (entityHealth != null)
+            if (entityHealth)
             {
-                foreach (var layer in layersCanAffect)
+                foreach (LayerMask layer in layersCanAffect)
                 {
                     if ((layer & 1 << gameObj.layer) == 1 << gameObj.layer)
                     {
@@ -109,21 +108,16 @@ public class EntityHealth : MonoBehaviour
             {
                 PlayerDied();
             }
-
             // Check is environment object
             else if (entityType == Entities.EntityType.environment)
             {
                 EnvironmentDied();
             }
-
             // Otherwise, must be enemy
             else
             {
                 EnemyDied();
-                
             }
-
-            
         }
 
         else
@@ -134,7 +128,6 @@ public class EntityHealth : MonoBehaviour
                 Debug.Log("Damaged");
                 eventDamaged.Invoke();
             }
-
             // Otherwise, it was healed
             else
             {
@@ -185,7 +178,5 @@ public class EntityHealth : MonoBehaviour
 
 }
 
-
-
-[System.Serializable]
-public class UnityEventDoubleInt : UnityEvent<int, int>{ }
+[Serializable]
+public class UnityEventDoubleInt : UnityEvent<int, int> { }

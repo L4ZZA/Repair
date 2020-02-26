@@ -92,19 +92,18 @@ public class ProjectileController : MonoBehaviour
                 else
                 {
                     entityProjectile.ChangeBulletToDamage();
-                    
                 }
 
                 entityProjectile.FireProjectileAtTarget(_playerDirection);
             }
             else
             {
-                Debug.Log(this + ": EntityProjectile was not found on this prefab.");
+                Debug.LogError(this + ": EntityProjectile was not found on this prefab.");
             }
         }
         else
         {
-            Debug.Log("projectilePrefab not null");
+            Debug.LogError("projectilePrefab not null");
         }
     }
 
@@ -112,10 +111,8 @@ public class ProjectileController : MonoBehaviour
     private void ChangePillDirection(GameObject _gameObject, float _rotation)
     {
         if (_gameObject)
-        {
             _gameObject.transform.localRotation = Quaternion.Euler(0, 0, _rotation);
-        }
-
-        else Debug.Log(this + "_gameObject is null.");
+        else
+            Debug.LogError(this + "_gameObject is null.");
     }
 }

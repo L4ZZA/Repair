@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -64,8 +62,10 @@ public class HUDController : MonoBehaviour
             buttonRestart.onClick.AddListener(Restart);
             buttonExit.onClick.AddListener(Exit);
         }
-
-        else Debug.Log(this + ": a button is null. Assign in inpector.");
+        else
+        {
+            Debug.LogWarning(this + ": a button is null. Assign in inpector.");
+        }
     }
 
 
@@ -73,11 +73,12 @@ public class HUDController : MonoBehaviour
     {
         if (playerHealth != null)
         {
-
             playerHealth.value = Mathf.Clamp(_value, 0, 100);
         }
-
-        else Debug.LogWarning(this + "slider not assigned. Can't change.");
+        else
+        {
+            Debug.LogWarning(this + "slider not assigned. Can't change.");
+        }
     }
 
 
@@ -87,8 +88,10 @@ public class HUDController : MonoBehaviour
         {
             timerText.text = _timer;
         }
-
-        else Debug.Log(this + ": text is null. Can't change.");
+        else
+        {
+            Debug.LogWarning(this + ": text is null. Can't change.");
+        }
     }
 
 
@@ -96,12 +99,14 @@ public class HUDController : MonoBehaviour
     {
         currentScore = _score;
 
-        if (scoreText != null)
+        if (scoreText)
         {
             scoreText.text = _score.ToString();
         }
-
-        else Debug.Log(this + ": text is null. Can't change.");
+        else
+        {
+            Debug.LogWarning(this + ": text is null. Can't change.");
+        }
     }
 
     public void ChangeFinalTextScore(Text _text, int _value, bool _toUpper)
@@ -117,10 +122,11 @@ public class HUDController : MonoBehaviour
             {
                 _text.text = "Score: " + _value.ToString();
             }
-
         }
-
-        else Debug.Log(this + ": text is null. Can't change.");
+        else
+        {
+            Debug.LogWarning(this + ": text is null. Can't change.");
+        }
     }
 
 
@@ -148,12 +154,15 @@ public class HUDController : MonoBehaviour
             {
                 playerHealth.value = _health;
             }
-
-            else Debug.Log(this + ": _health is below 0 or above 100.");
-            
+            else
+            {
+                Debug.LogWarning(this + ": _health is below 0 or above 100.");
+            }
         }
-
-        else Debug.Log(this + ": text is null. Can't change.");
+        else
+        {
+            Debug.LogError(this + ": text is null. Can't change.");
+        }
     }
 
 
@@ -165,21 +174,16 @@ public class HUDController : MonoBehaviour
             {
                 _text.text = _value.ToUpper();
             }
-            
             else
             {
                 _text.text = _value;
             }
-            
         }
-
-        else Debug.Log(this + ": text is null. Can't change.");
+        else
+        {
+            Debug.LogError(this + ": text is null. Can't change.");
+        }
     }
-
-
-
-
-
 
     private void ActivateObject(GameObject _gameObject, bool _show)
     {
@@ -187,19 +191,22 @@ public class HUDController : MonoBehaviour
         {
             _gameObject.SetActive(_show);
         }
-
-        else Debug.Log(this + ": can't show/hide. GameObject is null");
+        else
+        {
+            Debug.LogError(this + ": can't show/hide. GameObject is null");
+        }
     }
 
 
     private void Restart()
     {
-        Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+        Scene scene = SceneManager.GetActiveScene(); 
+        SceneManager.LoadScene(scene.name);
     }
 
 
     private void Exit()
     {
-        Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(0);
+        SceneManager.LoadScene(0);
     }
 }
