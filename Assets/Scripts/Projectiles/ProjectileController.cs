@@ -42,6 +42,9 @@ public class ProjectileController : MonoBehaviour
 
     void Update()
     {
+        if (HUDController.paused)
+            return;
+
         Vector3 dirToMouse = MouseHelpers.VecToMouse(Origin.position);
         Origin.rotation = MouseHelpers.ObjectToMouseRotation(Origin.position);
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -281,13 +281,26 @@ public class HUDController : MonoBehaviour
 
     public void Pause()
     {
+        SetFollowMouse(false);
         Time.timeScale = 0;
         paused = true;
     }
 
     public void Resume()
     {
+        SetFollowMouse(true);
         Time.timeScale = 1;
         paused = false;
+    }
+
+    void SetFollowMouse(bool followMouse)
+    {
+        var pivots = FindObjectsOfType(typeof(PivotRotation2D));
+        foreach(var p in pivots)
+        {
+            PivotRotation2D pivot = (PivotRotation2D)p;
+            var component = pivot.GetComponent<PivotRotation2D>();
+            component.enabled = followMouse;
+        }
     }
 }
