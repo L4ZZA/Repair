@@ -13,12 +13,10 @@ public class ScoreController : MonoBehaviour
 
     private float startTimer;
 
-    public static event Action<int> Action_UpdatedHUDScore = delegate { };
-
-    public static event Action Action_EnvironmentDestroyed = delegate { };
-    public static event Action<string> Action_ChangeTime = delegate { };
-
-    public static event Action<string> Action_GameOver = delegate { };
+    public static event Action<int>     Action_UpdatedHUDScore = delegate { };
+    public static event Action          Action_EnvironmentDestroyed = delegate { };
+    public static event Action<string>  Action_ChangeTime = delegate { };
+    public static event Action<string>  Action_GameOver = delegate { };
 
 
     private void Awake()
