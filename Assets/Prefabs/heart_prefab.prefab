@@ -183,6 +183,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityType: 2
   health: 1000
+  damage: 0
+  layersCanAffect: []
   score: -10000
   eventPlayerDied:
     m_PersistentCalls:

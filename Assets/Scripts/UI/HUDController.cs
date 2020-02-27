@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -15,24 +16,34 @@ public class HUDController : MonoBehaviour
     [Header("Weapon Icon")]
     [SerializeField] private WeaponIcon weaponIcon;
 
-    [Header("Game Over")]
+    [Header("Game Over screen")]
+    [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private Text gameOverText;
     [SerializeField] private Text finalScoreText;
-
-    [Header("Buttons")]
     [SerializeField] private Button buttonRestart;
     [SerializeField] private Button buttonExit;
 
+    [Header("Pause screen")]
+    [SerializeField] private GameObject pauseScreen;
+    [SerializeField] private Button buttonResume;
+    [SerializeField] private Button buttonQuit;
+
+    public static string EscapeBtnName = "Cancel";
+
+    private static bool paused = false;
+
+    public static event Action Action_Pause;
+    public static event Action Action_Resume;
 
     private void Awake()
     {
-        ActivateObject(gameOverText.gameObject, false);
-        ActivateObject(finalScoreText.gameObject, false);
+        ActivateObject(gameOverScreen, false);
 
-        ActivateObject(buttonRestart.gameObject, false);
-        ActivateObject(buttonExit.gameObject, false);
-
-        SetUpButtons();
+        RegisterButtons();
+    }
+    void OnDestroy()
+    {
+        UnregisterButtons();
     }
 
     private void OnEnable()
@@ -42,8 +53,10 @@ public class HUDController : MonoBehaviour
         ScoreController.Action_GameOver += ChangeGameOverText;
 
         EntityHealth.Action_PlayerHealthChanged += ChangeHealthSlider;
-    }
 
+        Action_Pause += ShowPauseMenu;
+        Action_Resume += HidePauseMenu;
+    }
 
     private void OnDisable()
     {
@@ -52,19 +65,54 @@ public class HUDController : MonoBehaviour
         ScoreController.Action_GameOver -= ChangeGameOverText;
 
         EntityHealth.Action_PlayerHealthChanged -= ChangeHealthSlider;
+
+        Action_Pause  -= ShowPauseMenu;
+        Action_Resume -= HidePauseMenu;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetButtonDown(EscapeBtnName))
+        {
+            if (paused)
+            {
+                Action_Resume.Invoke();
+            }
+            else
+            {
+                Action_Pause.Invoke();
+            }
+        }
     }
 
 
-    private void SetUpButtons()
+    private void RegisterButtons()
     {
-        if (buttonRestart != null && buttonRestart != null)
+        if (buttonRestart && buttonRestart && buttonQuit && buttonResume)
         {
             buttonRestart.onClick.AddListener(Restart);
-            buttonExit.onClick.AddListener(Exit);
+            buttonExit.onClick.AddListener(MainMenu);
+            buttonResume.onClick.AddListener(HidePauseMenu);
+            buttonQuit.onClick.AddListener(MainMenu);
         }
         else
         {
-            Debug.LogWarning(this + ": a button is null. Assign in inpector.");
+            Debug.LogWarning(this + ": a button is null in RegisterButtons(). Assign in inpector.");
+        }
+    }
+    private void UnregisterButtons()
+    {
+        if (buttonRestart && buttonRestart && buttonQuit && buttonResume)
+        {
+            buttonRestart.onClick.RemoveListener(Restart);
+            buttonExit.onClick.RemoveListener(MainMenu);
+            buttonResume.onClick.RemoveListener(HidePauseMenu);
+            buttonQuit.onClick.RemoveListener(MainMenu);
+        }
+        else
+        {
+            Debug.LogWarning(this + ": a button is null in UnregisterButtons(). Assign in inpector.");
         }
     }
 
@@ -132,10 +180,7 @@ public class HUDController : MonoBehaviour
 
     private void ChangeGameOverText(string _text)
     {
-        ActivateObject(gameOverText.gameObject, true);
-        ActivateObject(finalScoreText.gameObject, true);
-        ActivateObject(buttonRestart.gameObject, true);
-        ActivateObject(buttonExit.gameObject, true);
+        ActivateObject(gameOverScreen, true);
 
         ChangeText(gameOverText, _text, true);
         ChangeFinalTextScore(finalScoreText, currentScore, true);
@@ -197,16 +242,52 @@ public class HUDController : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Restart the level
+    /// </summary>
     private void Restart()
     {
+        HidePauseMenu();
         Scene scene = SceneManager.GetActiveScene(); 
         SceneManager.LoadScene(scene.name);
     }
 
-
-    private void Exit()
+    /// <summary>
+    /// Go back to the main menu
+    /// </summary>
+    private void MainMenu()
     {
+        HidePauseMenu();
         SceneManager.LoadScene(0);
+    }
+
+    /// <summary>
+    /// Pause the gameplay.
+    /// </summary>
+    void ShowPauseMenu()
+    {
+        Pause();
+        ActivateObject(pauseScreen, true);
+    }
+
+    /// <summary>
+    /// Resume gameplay.
+    /// </summary>
+    void HidePauseMenu()
+    {
+        Resume();
+        ActivateObject(pauseScreen, false);
+    }
+
+    public static void Pause()
+    {
+        Time.timeScale = 0;
+        paused = true;
+    }
+
+    public static void Resume()
+    {
+        Time.timeScale = 1;
+        paused = false;
     }
 }
