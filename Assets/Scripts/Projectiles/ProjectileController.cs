@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
-    
-    [SerializeField] 
+
+    [SerializeField]
     private GameObject projectilePrefab;
-    
-    [SerializeField] 
+
+    [SerializeField]
     private GameObject firingPosition;
-    
-    [SerializeField] 
+
+    [SerializeField]
     private SpriteRenderer targetSprite;
 
     [Header("Object Transform")]
@@ -40,23 +40,15 @@ public class ProjectileController : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        transform.parent = Origin.transform;
-    }
-
     void Update()
     {
-        Vector3 OriginVector = Camera.main.WorldToScreenPoint(Origin.position);
-        OriginVector = Input.mousePosition - OriginVector;
-        float angle = Mathf.Atan2(OriginVector.y, OriginVector.x) * Mathf.Rad2Deg;
-
-        Origin.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        Vector3 dirToMouse = MouseHelpers.VecToMouse(Origin.position);
+        Origin.rotation = MouseHelpers.ObjectToMouseRotation(Origin.position);
 
 
         if (Input.GetMouseButtonDown(0))
         {
-            SpawnProjectileAtTarget(OriginVector.normalized);
+            SpawnProjectileAtTarget(dirToMouse);
         }
 
         if (Input.GetKeyDown(weaponButton))
@@ -71,10 +63,10 @@ public class ProjectileController : MonoBehaviour
             {
                 ChangePillDirection(pillSpriteObject, 180);
             }
-            
+
         }
     }
-    
+
     public void SpawnProjectileAtTarget(Vector3 _playerDirection)
     {
         if (projectilePrefab)

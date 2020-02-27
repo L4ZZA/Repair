@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -30,7 +30,7 @@ public class HUDController : MonoBehaviour
 
     public static string EscapeBtnName = "Cancel";
 
-    private static bool paused = false;
+    public static bool paused = false;
 
     public static event Action Action_Pause;
     public static event Action Action_Resume;
@@ -279,13 +279,13 @@ public class HUDController : MonoBehaviour
         ActivateObject(pauseScreen, false);
     }
 
-    public static void Pause()
+    public void Pause()
     {
         Time.timeScale = 0;
         paused = true;
     }
 
-    public static void Resume()
+    public void Resume()
     {
         Time.timeScale = 1;
         paused = false;

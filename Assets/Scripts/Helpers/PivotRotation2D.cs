@@ -24,15 +24,14 @@ public class PivotRotation2D : MonoBehaviour
         Vector3 pivotVector;
         if (followMouse)
         {
-            pivotVector = Camera.main.WorldToScreenPoint(transform.position);
-            pivotVector = Input.mousePosition - pivotVector;
+            pivotVector = MouseHelpers.VecToMouse(transform.position);
         }
         else
         {
             pivotVector = TargetToLookAt.position - transform.position;
+            pivotVector.Normalize();
         }
 
-        pivotVector.Normalize();
         float angle = Mathf.Atan2(pivotVector.y, pivotVector.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
     }
