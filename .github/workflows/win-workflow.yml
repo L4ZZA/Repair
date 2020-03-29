@@ -1,0 +1,40 @@
+# Workflow name
+name: Windows Build
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    container: gableroux/unity3d:2019.3.0f6-windows
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Checkout repo
+      uses: actions/checkout@v1
+
+    - name: Decript License file 
+      run: openssl aes-256-cbc -d -in .github/Unity_v2019.x.ulf.enc -k ${{ secrets.UNITY_LICENSE_DECRYPT_KEY }} >> .github/Unity_v2019.x.ulf
+
+    - name: Activate Unity
+      run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
+  
+    - name: Build Windows Player
+      run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -buildWindows64Player ./bin-win64/DoctorHyde.exe
+    
+    # Register windows artifact
+    - name: Archive Windows Build
+      uses: actions/upload-artifact@v1
+      with:
+        name: DoctorHydeWin64Binary
+        path: ./bin-win64
