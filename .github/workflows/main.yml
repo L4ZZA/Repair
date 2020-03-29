@@ -1,5 +1,5 @@
 # Workflow name
-name: Project build
+name: IOS Build
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -15,7 +15,7 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    container: gableroux/unity3d:2019.3.0f6
+    container: gableroux/unity3d:2019.3.0f6-ios
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -30,7 +30,13 @@ jobs:
       run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
   
     # Build Windows and OSX
-    - name: Build Windows Player
-      run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -buildWindows64Player ./bin-win64/DoctorHyde.exe
     - name: Build OSX Player
-      run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -buildOSXUniversalPlayer ./bin-osx/DoctorHyde.app     
+      run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -buildOSXUniversalPlayer ./bin-osx/DoctorHyde.app
+
+    # Register windows artifact
+    - name: Archive Mac Build
+      uses: actions/upload-artifact@v1
+      with:
+        name: DoctorHydeOSXBinary
+        path: ./bin-osx
+      
