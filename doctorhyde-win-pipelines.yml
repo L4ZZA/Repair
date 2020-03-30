@@ -1,11 +1,18 @@
+name: doctorhyde-android-$(Date:yyyyMMdd)$(Rev:.r)
+variables:
+  var1: value1
+jobs:
+- job: One
+  steps:
+  - script: echo First step!
 
-# 
-- task: UnityGetProjectVersionTask@1
-  inputs:
-    unityProjectPath: $(UNITY_PROJ_PATH)
+  # 
+  - task: UnityGetProjectVersionTask@1
+    inputs:
+      unityProjectPath: $(UNITY_PROJ_PATH)
 
-# 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: 'Install-Module UnitySetup -Scope CurrentUser'
+  # 
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: 'Install-Module UnitySetup -Scope CurrentUser'
