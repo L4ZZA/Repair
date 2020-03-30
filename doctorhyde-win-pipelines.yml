@@ -15,4 +15,5 @@ jobs:
   - task: PowerShell@2
     inputs:
       targetType: 'inline'
-      script: 'Install-Module UnitySetup -Scope CurrentUser'
+      script: 'Install-Module UnitySetup -Scope CurrentUser -Force'
+      failOnStderr: true
