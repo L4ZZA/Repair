@@ -5,9 +5,9 @@ name: Windows Build
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [ master, develop ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, develop ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -23,15 +23,16 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v1
 
-    - name: Decript License file 
+    - name: Decrypt License file
       run: openssl aes-256-cbc -d -in .github/Unity_v2019.x.ulf.enc -k ${{ secrets.UNITY_LICENSE_DECRYPT_KEY }} >> .github/Unity_v2019.x.ulf
 
     - name: Activate Unity
       run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
-  
+
+    # Build Windows
     - name: Build Windows Player
       run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -buildWindows64Player ./bin-win64/DoctorHyde.exe
-    
+
     # Register windows artifact
     - name: Archive Windows Build
       uses: actions/upload-artifact@v1
