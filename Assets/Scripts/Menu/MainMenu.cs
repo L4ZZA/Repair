@@ -3,6 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    MusicAnimator musicAnim;
+
+    private void Start()
+    {
+        musicAnim = FindObjectOfType<MusicAnimator>();
+    }
+
     public void PlayGame()
     {
         int sceneCount = SceneManager.sceneCount;
@@ -11,6 +18,7 @@ public class MainMenu : MonoBehaviour
 
         if (currentScene < sceneCount)
         {
+            musicAnim?.FadeOut();
             SceneManager.LoadScene(currentScene + 1);
         }
         else

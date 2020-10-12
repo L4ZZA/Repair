@@ -28,6 +28,8 @@ public class HUDController : MonoBehaviour
     [SerializeField] private Button buttonResume;
     [SerializeField] private Button buttonQuit;
 
+    private MusicAnimator musicAnim;
+
     public static string EscapeBtnName = "Cancel";
 
     public static bool paused = false;
@@ -68,6 +70,11 @@ public class HUDController : MonoBehaviour
 
         Action_Pause  -= ShowPauseMenu;
         Action_Resume -= HidePauseMenu;
+    }
+
+    private void Start()
+    {
+        musicAnim = FindObjectOfType<MusicAnimator>();
     }
 
     // Update is called once per frame
@@ -248,7 +255,8 @@ public class HUDController : MonoBehaviour
     private void Restart()
     {
         HidePauseMenu();
-        Scene scene = SceneManager.GetActiveScene(); 
+        Scene scene = SceneManager.GetActiveScene();
+        musicAnim?.FadeOut();
         SceneManager.LoadScene(scene.name);
     }
 
