@@ -1,5 +1,5 @@
 # Workflow name
-name: IOS Build
+name: Mac Build
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
