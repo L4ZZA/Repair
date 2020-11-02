@@ -47,6 +47,7 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4925,6 +4926,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5005,6 +5007,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5085,6 +5088,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5135,6 +5139,7 @@ GameObject:
   - component: {fileID: 1646939452969087869}
   - component: {fileID: 1620421538}
   - component: {fileID: 21481141}
+  - component: {fileID: 3003644579231877757}
   m_Layer: 11
   m_Name: player
   m_TagString: Untagged
@@ -5203,7 +5208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33eefa407d6e41b43b510b22604b948a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  Speed: 2
 --- !u!114 &1646939452969087869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5271,3 +5276,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hideOnGameOver: 1
+--- !u!50 &3003644579231877757
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7551374861468067455}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

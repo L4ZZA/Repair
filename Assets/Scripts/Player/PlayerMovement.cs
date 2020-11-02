@@ -4,30 +4,26 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 4;
+    public float Speed = 40;
+
+    Rigidbody2D rigidBody;
+    Vector2 moveAmount;
+
+    void Start()
+    {
+        rigidBody = GetComponent<Rigidbody2D>();
+    }
+
+    void FixedUpdate()
+    {
+        rigidBody.MovePosition(rigidBody.position + moveAmount * Time.fixedDeltaTime);
+    }
 
     void Update()
     {
-        Vector3 pos = transform.position;
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            pos.y += speed * Time.deltaTime;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            pos.y -= speed * Time.deltaTime;
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            pos.x += speed * Time.deltaTime;
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            pos.x -= speed * Time.deltaTime;
-        }
-
-        transform.position = pos;
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        Vector2 moveInput = new Vector2(horizontal, vertical);
+        moveAmount = moveInput.normalized * Speed;
     }
 }
