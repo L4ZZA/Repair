@@ -14,6 +14,9 @@ public class ProjectileController : MonoBehaviour
     [SerializeField]
     private SpriteRenderer targetSprite;
 
+    [SerializeField]
+    private SpriteRenderer playerHalo;
+
     [Header("Object Transform")]
     [SerializeField]
     public Transform Origin;
@@ -25,9 +28,13 @@ public class ProjectileController : MonoBehaviour
     [Header("Change Weapons")]
     [SerializeField] KeyCode weaponButton = KeyCode.LeftShift;
 
+    private Color repairColor = Color.HSVToRGB(167f/360f, 1f, 1f);
+    private Color destroyColor = Color.HSVToRGB(0f, 1f, 1f);
+
     private void Awake()
     {
         repairBulletSelected = true;
+        playerHalo.color = repairColor;
 
         if (projectilePrefab == null)
         {
@@ -61,10 +68,12 @@ public class ProjectileController : MonoBehaviour
             if (repairBulletSelected)
             {
                 ChangePillDirection(pillSpriteObject, 0);
+                playerHalo.color = repairColor;
             }
             else
             {
                 ChangePillDirection(pillSpriteObject, 180);
+                playerHalo.color = destroyColor;
             }
 
         }
