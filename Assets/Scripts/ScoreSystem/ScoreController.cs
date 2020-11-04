@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 
 public class ScoreController : MonoBehaviour
@@ -67,10 +67,10 @@ public class ScoreController : MonoBehaviour
     {
         timer = Mathf.Clamp(timer -= Time.deltaTime, 0, startTimer);
 
-        string minutes = Mathf.Floor(timer / 60).ToString("00");
-        string seconds = (timer % 60).ToString("00");
+        var span = TimeSpan.FromSeconds(timer);
+        string sTimer = span.ToString(@"mm\:ss");
 
-        ChangeTimer(string.Format("{0}:{1}", minutes, seconds));
+        ChangeTimer(sTimer);
 
         if (timer == 0)
         {
