@@ -41,6 +41,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Environment
+    uniqueID: 3552434501
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Lights
+    uniqueID: 4114838531
     locked: 0

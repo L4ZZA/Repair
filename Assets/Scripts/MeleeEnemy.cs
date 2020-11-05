@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeEnemy : Enemy
@@ -23,25 +22,43 @@ public class MeleeEnemy : Enemy
                 if(Time.time >= attackTime)
                 {
                     //attack
-                    StartCoroutine(Attack());
                     attackTime = Time.time + timeBtwAttacks;
+                    StartCoroutine(MeleeAttack());
                 }
             }
         }
     }
 
-    IEnumerator Attack()
+    //IEnumerator MeleeAttack()
+    //{
+    //    player.GetComponent<Player>().TakeDamage(damage);
+    //    Vector2 originalPosition = transform.position;
+    //    Vector2 targetPosition = player.position;
+
+    //    float percent = 0f;
+    //    while (percent <= 1)
+    //    {
+    //        percent += Time.deltaTime * attackSpeed;
+    //        float interpolation = (-Mathf.Pow(percent, 2) + percent) * 4;
+    //        transform.position = Vector2.Lerp(originalPosition, targetPosition, interpolation);
+    //        yield return null;
+    //    }
+    //}
+
+
+    IEnumerator MeleeAttack()
     {
         player.GetComponent<Player>().TakeDamage(damage);
         Vector2 originalPosition = transform.position;
         Vector2 targetPosition = player.position;
 
-        float percent = 0f;
-        while(percent <= 1f)
+        float curveTime = 0f;
+        float curveAmount = attackAnimationCurve.Evaluate(curveTime);
+        while (curveTime < 1.0f)
         {
-            percent += Time.deltaTime * attackSpeed;
-            float parabolicCurve = (-Mathf.Pow(percent, 2f) + percent) * 4f;
-            transform.position = Vector2.Lerp(originalPosition, targetPosition, parabolicCurve);
+            curveTime += Time.deltaTime * attackSpeed;
+            curveAmount = attackAnimationCurve.Evaluate(curveTime);
+            transform.position = Vector2.Lerp(originalPosition, targetPosition, curveAmount);
             yield return null;
         }
     }
