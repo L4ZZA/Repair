@@ -5,6 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float speed;
+    public int damage;
     public float lifeTime;
     public GameObject explosion;
 
@@ -25,4 +26,15 @@ public class Projectile : MonoBehaviour
         Instantiate(explosion, transform.position, transform.rotation);
         Destroy(gameObject);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            var enemy = collision.GetComponent<Enemy>();
+            enemy.TakeDamage(damage);
+            destroyProjectile();
+        }
+    }
+
 }
