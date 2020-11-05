@@ -7,6 +7,11 @@ public class CameraFollow : MonoBehaviour
     public Transform playerTransform;
     public float speed;
 
+    public float minX;
+    public float maxX;
+    public float minY;
+    public float maxY;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +21,12 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float clampedX = Mathf.Clamp(playerTransform.position.x, minX, maxX);
+        float clampedY = Mathf.Clamp(playerTransform.position.y, minY, maxY);
+        Vector2 clampedPos = new Vector2(clampedX, clampedY);
         if (playerTransform)
         {
-            transform.position = Vector2.Lerp(transform.position, playerTransform.position, speed);
+            transform.position = Vector2.Lerp(transform.position, clampedPos, speed);
         }
     }
 }
