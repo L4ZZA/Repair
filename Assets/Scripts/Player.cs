@@ -26,15 +26,7 @@ public class Player : MonoBehaviour
         moveAmount = input.normalized * speed;
 
         bool isRunning = moveAmount != Vector2.zero;
-        if (isRunning)
-        {
-            anim.SetBool("IsRunning", true);
-        }
-        else
-        {
-            anim.SetBool("IsRunning", false);
-        }
-
+        anim.SetBool("IsRunning", isRunning);
     }
 
     void FixedUpdate()
