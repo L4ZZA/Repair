@@ -2520,7 +2520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4108834626991248, guid: 82b1649d54f1b5d4fbadf8202a680d0a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.260998
+      value: 40.2
       objectReference: {fileID: 0}
     - target: {fileID: 4108834626991248, guid: 82b1649d54f1b5d4fbadf8202a680d0a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2561,6 +2561,11 @@ PrefabInstance:
     - target: {fileID: 4108834626991248, guid: 82b1649d54f1b5d4fbadf8202a680d0a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649606495737126283, guid: 82b1649d54f1b5d4fbadf8202a680d0a,
+        type: 3}
+      propertyPath: timeBtwAttacks
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82b1649d54f1b5d4fbadf8202a680d0a, type: 3}
@@ -3671,6 +3676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 30
+  health: 5
 --- !u!61 &2143019239
 BoxCollider2D:
   m_ObjectHideFlags: 0

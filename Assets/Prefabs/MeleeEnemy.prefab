@@ -522,8 +522,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  damage: 1
   speed: 20
+  timeBtwAttacks: 3
   stopDistance: 10
+  attackSpeed: 8
 --- !u!1 &1724561593432388
 GameObject:
   m_ObjectHideFlags: 0
