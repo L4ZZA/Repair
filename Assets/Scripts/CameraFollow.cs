@@ -21,11 +21,11 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float clampedX = Mathf.Clamp(playerTransform.position.x, minX, maxX);
-        float clampedY = Mathf.Clamp(playerTransform.position.y, minY, maxY);
-        Vector2 clampedPos = new Vector2(clampedX, clampedY);
         if (playerTransform)
         {
+            float clampedX = Mathf.Clamp(playerTransform.position.x, minX, maxX);
+            float clampedY = Mathf.Clamp(playerTransform.position.y, minY, maxY);
+            Vector2 clampedPos = new Vector2(clampedX, clampedY);
             transform.position = Vector2.Lerp(transform.position, clampedPos, speed);
         }
     }
