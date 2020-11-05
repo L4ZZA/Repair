@@ -5,7 +5,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int health;
+    public float speed;
+    protected Transform player;
 
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
     public void TakeDamage(int damageAmount)
     {
         health -= damageAmount;
