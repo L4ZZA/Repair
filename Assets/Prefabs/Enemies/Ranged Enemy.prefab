@@ -202,39 +202,12 @@ MonoBehaviour:
   speed: 17
   timeBtwAttacks: 4
   damage: 0
-  attackAnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2.0027251
-      outSlope: 2.0027251
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.49931967
-      value: 1
-      inSlope: -0.017630935
-      outSlope: -0.017630935
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.98999995
-      value: 0
-      inSlope: -2.037987
-      outSlope: -2.037987
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  pickupChance: 20
+  pickups:
+  - {fileID: 1934359494781152, guid: 9822a2ce49cd5c242bac5f1827eaa880, type: 3}
+  - {fileID: 1401558803114332, guid: c7632111f5946ef41ba605eeafef26dd, type: 3}
+  - {fileID: 1190237112253662, guid: 6af888e8fdf0e914482cc65a31e4e7bc, type: 3}
+  - {fileID: 1559926994414632, guid: afa148b4b40e76e4abb64ab1c0a08428, type: 3}
   stopDistance: 25
   shotPoint: {fileID: 4208454276216348}
   enemyBullet: {fileID: 1879413690073600, guid: 82efb036ed0a01c4eabc216d792dc675,

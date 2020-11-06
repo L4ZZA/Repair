@@ -10,6 +10,10 @@ public class Enemy : MonoBehaviour
     public float timeBtwAttacks;
     public int damage;
 
+    // between 0 and 100
+    public int pickupChance;
+    public GameObject[] pickups;
+
     protected Transform player;
 
     public virtual void Start()
@@ -22,6 +26,13 @@ public class Enemy : MonoBehaviour
         health -= damageAmount;
         if(health <= 0)
         {
+            int randomNumber = Random.Range(0, 101);
+            if(randomNumber < pickupChance)
+            {
+                int randomIndex = Random.Range(0, pickups.Length);
+                GameObject randPickup = pickups[randomIndex];
+                Instantiate(randPickup, transform.position, transform.rotation);
+            }
             Destroy(gameObject);
         }
     }

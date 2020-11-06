@@ -525,6 +525,12 @@ MonoBehaviour:
   speed: 20
   timeBtwAttacks: 3
   damage: 1
+  pickupChance: 20
+  pickups:
+  - {fileID: 1934359494781152, guid: 9822a2ce49cd5c242bac5f1827eaa880, type: 3}
+  - {fileID: 1401558803114332, guid: c7632111f5946ef41ba605eeafef26dd, type: 3}
+  - {fileID: 1190237112253662, guid: 6af888e8fdf0e914482cc65a31e4e7bc, type: 3}
+  - {fileID: 1559926994414632, guid: afa148b4b40e76e4abb64ab1c0a08428, type: 3}
   attackAnimationCurve:
     serializedVersion: 2
     m_Curve:
