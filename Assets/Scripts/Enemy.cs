@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
     public float speed;
     public float timeBtwAttacks;
     public int damage;
-    public AnimationCurve attackAnimationCurve;
 
     protected Transform player;
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Summoner : Enemy
 {
+    public AnimationCurve attackAnimationCurve;
     public float minX;
     public float maxX;
     public float minY;
@@ -78,7 +79,6 @@ public class Summoner : Enemy
         Vector2 targetPosition = player.position;
 
         float curveTime = 0f;
-        //float curveAmount = attackAnimationCurve.Evaluate(curveTime);
         while (curveTime < 1.0f)
         {
             curveTime += Time.deltaTime * meleeAttackSpeed;
