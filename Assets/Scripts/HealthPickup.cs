@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pickup : MonoBehaviour
+public class HealthPickup : MonoBehaviour
 {
-    public Weapon weaponToEquip;
+    public int healAmount;
     Player player;
 
     private void Start()
@@ -16,7 +16,7 @@ public class Pickup : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            player.ChangeWeapon(weaponToEquip);
+            player.Heal(healAmount);
             Destroy(gameObject);
         }
     }

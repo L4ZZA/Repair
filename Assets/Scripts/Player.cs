@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -38,7 +39,8 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        //health -= damageAmount;
+        health -= damageAmount;
+        UpdateHealthUI(health);
         if (health <= 0)
         {
             Destroy(gameObject);
@@ -50,4 +52,37 @@ public class Player : MonoBehaviour
         Destroy(GameObject.FindGameObjectWithTag("Weapon"));
         Instantiate(weaponToEquip, transform.position, transform.rotation, transform);
     }
+
+    public Image[] hearts;
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
+
+    void UpdateHealthUI(int currentHealth)
+    {
+        for(int i = 0; i < hearts.Length; i++)
+        {
+            if(i < currentHealth)
+            {
+                hearts[i].sprite = fullHeart;
+            }
+            else
+            {
+                hearts[i].sprite = emptyHeart;
+            }
+        }
+    }
+
+    public void Heal(int healAmount)
+    {
+        if(health + healAmount > hearts.Length)
+        {
+            health = hearts.Length;
+        }
+        else
+        {
+            health++;
+        }
+        UpdateHealthUI(health);
+    }
+
 }
