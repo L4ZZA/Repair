@@ -27,7 +27,8 @@ public class WaveSpawner : MonoBehaviour
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        StartCoroutine(startNextWave(currentWaveIndex));
+        Debug.Log($"Starting New Wave: {currentWaveIndex}");
+        StartCoroutine(startNextWave(currentWaveIndex, true));
     }
 
     private void Update()
@@ -39,6 +40,7 @@ public class WaveSpawner : MonoBehaviour
             if(currentWaveIndex + 1 < waves.Length)
             {
                 currentWaveIndex++;
+                Debug.Log($"Starting New Wave: {currentWaveIndex}");
                 StartCoroutine(startNextWave(currentWaveIndex));
             }
             else
@@ -48,9 +50,11 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
-    IEnumerator startNextWave(int index)
+    IEnumerator startNextWave(int index, bool firstWave = false)
     {
-        yield return new WaitForSeconds(timeBtwWaves);
+        // don't wait for the first wave
+        if(!firstWave)
+            yield return new WaitForSeconds(timeBtwWaves);
         StartCoroutine(spawnWave(index));
     }
 
@@ -58,7 +62,7 @@ public class WaveSpawner : MonoBehaviour
     {
         currentWave = waves[index];
 
-        for(int i = 0; i < waves.Length; i++)
+        for(int i = 0; i < currentWave.count; i++)
         {
             if(!playerTransform)
             {

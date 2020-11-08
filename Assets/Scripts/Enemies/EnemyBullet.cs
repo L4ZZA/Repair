@@ -6,6 +6,7 @@ public class EnemyBullet : MonoBehaviour
 {
     public float speed;
     public int damage;
+    public GameObject effect;
 
     Player player;
     Vector2 targetPosition;
@@ -26,7 +27,7 @@ public class EnemyBullet : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            DestroyBullet();
         }
     }
 
@@ -35,7 +36,13 @@ public class EnemyBullet : MonoBehaviour
     {
         if(collision.CompareTag("Player")) {
             player.TakeDamage(damage);
-            Destroy(gameObject);
+            DestroyBullet();
         }
+    }
+
+    private void DestroyBullet()
+    {
+        Instantiate(effect, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 }

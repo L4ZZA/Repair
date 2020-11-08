@@ -5,6 +5,9 @@ using UnityEngine;
 public class Blood : MonoBehaviour
 {
     public float fadeSpeed = 1f;
+    public float minFadeValue;
+    // Makes the blood stain disappear after the fade has completed.
+    public bool persist;
     Color currentColor = Color.white;
     SpriteRenderer sprite;
 
@@ -18,11 +21,15 @@ public class Blood : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentColor.a -= Time.deltaTime * fadeSpeed;
-        sprite.color = currentColor;
-        if(currentColor.a <= 0f)
+        if(currentColor.a <= minFadeValue)
         {
-            Destroy(gameObject);
+            if(!persist)
+                Destroy(gameObject);
+        }
+        else
+        {
+            currentColor.a -= Time.deltaTime * fadeSpeed;
+            sprite.color = currentColor;            
         }
     }
 }

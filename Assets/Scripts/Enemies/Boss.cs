@@ -8,6 +8,8 @@ public class Boss : MonoBehaviour
     public Enemy[] enemies;
     public float spawnOffset;
     public int damage;
+    public GameObject blood;
+    public GameObject deathEffect;
 
     int halfHealth;
     Animator anim;
@@ -18,13 +20,13 @@ public class Boss : MonoBehaviour
     {
         halfHealth = health >> 1;
         anim = GetComponent<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
-        { player.TakeDamage(damage);
+        {
+            player.TakeDamage(damage);
         }
     }
 
@@ -34,6 +36,8 @@ public class Boss : MonoBehaviour
 
         if(health <= 0)
         {
+            Instantiate(blood, transform.position, transform.rotation);
+            Instantiate(deathEffect, transform.position, transform.rotation);
             Destroy(gameObject);
         }
 

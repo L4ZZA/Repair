@@ -159,6 +159,9 @@ MonoBehaviour:
   - {fileID: 114139940114050450, guid: cfbd62a309947174ba5c7a626cf81ffe, type: 3}
   spawnOffset: 20
   damage: 1
+  blood: {fileID: 8976840679376433746, guid: a0bb51370c3ca554b83a21546e8effc7, type: 3}
+  deathEffect: {fileID: 1206640576334704, guid: 7b9fd5ef3813ea94c82f6a8cd63159e7,
+    type: 3}
 --- !u!61 &61158842547905488
 BoxCollider2D:
   m_ObjectHideFlags: 0

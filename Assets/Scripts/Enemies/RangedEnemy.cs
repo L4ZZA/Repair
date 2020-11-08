@@ -21,15 +21,15 @@ public class RangedEnemy : Enemy
     // Update is called once per frame
     void Update()
     {
-        if (player)
+        if(player)
         {
-            if (Vector2.Distance(transform.position, player.position) > stopDistance)
+            if(Vector2.Distance(transform.position, player.position) > stopDistance)
             {
                 transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
             }
             else
             {
-                if (Time.time >= attackTime)
+                if(Time.time >= attackTime)
                 {
                     //attack
                     attackTime = Time.time + timeBtwAttacks;
@@ -41,11 +41,14 @@ public class RangedEnemy : Enemy
 
     public void RangedAttack()
     {
-        Vector2 direction = player.position - shotPoint.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Quaternion rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-        shotPoint.rotation = rotation;
+        if(player)
+        {
+            Vector2 direction = player.position - shotPoint.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            Quaternion rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+            shotPoint.rotation = rotation;
 
-        Instantiate(enemyBullet, shotPoint.position, shotPoint.rotation);
+            Instantiate(enemyBullet, shotPoint.position, shotPoint.rotation);
+        }
     }
 }
