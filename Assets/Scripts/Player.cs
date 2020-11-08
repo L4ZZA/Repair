@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     public float speed;
     public int health;
+    public Animator hurtAnim;
 
     Rigidbody2D rb;
     Vector2 moveAmount;
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         health -= damageAmount;
+        hurtAnim.SetTrigger("hurt");
         UpdateHealthUI(health);
         if (health <= 0)
         {
