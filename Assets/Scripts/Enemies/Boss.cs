@@ -13,7 +13,6 @@ public class Boss : MonoBehaviour
 
     int halfHealth;
     Animator anim;
-    Player player;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +25,9 @@ public class Boss : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            player.TakeDamage(damage);
+            var player = collision.GetComponent<Player>();
+            if(player)
+                player.TakeDamage(damage);
         }
     }
 
