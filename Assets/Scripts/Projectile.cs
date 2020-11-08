@@ -8,11 +8,13 @@ public class Projectile : MonoBehaviour
     public int damage;
     public float lifeTime;
     public GameObject explosion;
+    public GameObject soundObject;
 
     // Start is called before the first frame update
     void Start()
     {
         Invoke("destroyProjectile", lifeTime);
+        Instantiate(soundObject, transform.position, transform.rotation);
     }
 
     // Update is called once per frame
