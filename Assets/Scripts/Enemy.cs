@@ -18,6 +18,9 @@ public class Enemy : MonoBehaviour
     public int healthPickupChance;
     public GameObject healthPickup;
 
+    public GameObject blood;
+    public GameObject deathEffect;
+
     protected Transform player;
 
     public virtual void Start()
@@ -43,6 +46,9 @@ public class Enemy : MonoBehaviour
             {
                 Instantiate(healthPickup, transform.position, transform.rotation);
             }
+            
+            Instantiate(blood, transform.position, Quaternion.identity);
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

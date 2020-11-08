@@ -120,6 +120,13 @@ MonoBehaviour:
   speed: 25
   timeBtwAttacks: 1
   damage: 1
+  weaponPickupChance: 0
+  weaponsPickups: []
+  healthPickupChance: 0
+  healthPickup: {fileID: 0}
+  blood: {fileID: 1043538154138308, guid: 723c1b944c3284544b67bf58643d27e8, type: 3}
+  deathEffect: {fileID: 1354371608571034, guid: 3abdbfe8674c57c4e972d8b28fadb635,
+    type: 3}
   attackAnimationCurve:
     serializedVersion: 2
     m_Curve:

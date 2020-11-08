@@ -211,6 +211,9 @@ MonoBehaviour:
   healthPickupChance: 35
   healthPickup: {fileID: 1140817993291220, guid: 2c41cef25e8249649970ca87d32a553b,
     type: 3}
+  blood: {fileID: 1043538154138308, guid: 723c1b944c3284544b67bf58643d27e8, type: 3}
+  deathEffect: {fileID: 1354371608571034, guid: 3abdbfe8674c57c4e972d8b28fadb635,
+    type: 3}
   stopDistance: 25
   shotPoint: {fileID: 4208454276216348}
   enemyBullet: {fileID: 1879413690073600, guid: 82efb036ed0a01c4eabc216d792dc675,
