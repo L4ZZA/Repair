@@ -7,6 +7,8 @@ public class Pickup : MonoBehaviour
     public Weapon weaponToEquip;
     Player player;
 
+    public GameObject effect;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -16,6 +18,7 @@ public class Pickup : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
+            Instantiate(effect, transform.position, transform.rotation);
             player.ChangeWeapon(weaponToEquip);
             Destroy(gameObject);
         }

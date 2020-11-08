@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healAmount: 1
+  effect: {fileID: 1761433749851248, guid: 9bfd7f35f41c4754eb587afc4130c4d3, type: 3}
 --- !u!82 &82991258183209804
 AudioSource:
   m_ObjectHideFlags: 0

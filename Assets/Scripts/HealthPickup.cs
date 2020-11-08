@@ -6,6 +6,7 @@ public class HealthPickup : MonoBehaviour
 {
     public int healAmount;
     Player player;
+    public GameObject effect;
 
     private void Start()
     {
@@ -16,6 +17,7 @@ public class HealthPickup : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
+            Instantiate(effect, transform.position, transform.rotation);
             player.Heal(healAmount);
             Destroy(gameObject);
         }

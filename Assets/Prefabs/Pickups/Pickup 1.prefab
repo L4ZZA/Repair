@@ -124,6 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponToEquip: {fileID: 7677228528383231198, guid: c58b05100bfcd254285505719111dc82,
     type: 3}
+  effect: {fileID: 1761433749851248, guid: 9bfd7f35f41c4754eb587afc4130c4d3, type: 3}
 --- !u!82 &82719138944652252
 AudioSource:
   m_ObjectHideFlags: 0
