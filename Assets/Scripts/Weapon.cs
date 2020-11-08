@@ -9,8 +9,14 @@ public class Weapon : MonoBehaviour
     public float timeBetweenShots;
 
     float shotTime;
+    Animator cameraAnim;
 
     // Update is called once per frame
+    void Start()
+    {
+        cameraAnim = Camera.main.GetComponent<Animator>();
+    }
+
     void Update()
     {
         bool mouseLeftButtonDown = Input.GetMouseButton(0);
@@ -18,6 +24,7 @@ public class Weapon : MonoBehaviour
         {
             if (Time.time > shotTime)
             {
+                cameraAnim.SetTrigger("shotShake");
                 Instantiate(projectile, shotPoint.position, transform.rotation);
                 shotTime = Time.time + timeBetweenShots;
             }
