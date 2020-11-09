@@ -8,7 +8,10 @@ public class Destroyer : MonoBehaviour {
 
     private void Start()
     {
-        Destroy(gameObject, lifeTime);
+        if(lifeTime > 0)
+        {
+            Destroy(gameObject, lifeTime);
+        }
     }
 
 }

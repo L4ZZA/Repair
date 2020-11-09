@@ -4823,6 +4823,7 @@ GameObject:
   - component: {fileID: 4812445779183550}
   - component: {fileID: 198441735510129736}
   - component: {fileID: 199410029444429792}
+  - component: {fileID: -367014898378509183}
   m_Layer: 0
   m_Name: Pickup Effect
   m_TagString: Untagged
@@ -9625,3 +9626,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-367014898378509183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761433749851248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8566c0d4ee6b6b844b15ab95449f8696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 5

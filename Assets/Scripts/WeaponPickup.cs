@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPickup : Pickup
+public class WeaponPickup : Pickup
 {
-    public int healAmount;
+    public Weapon weaponToEquip;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(player && collision.CompareTag("Player"))
+        if(collision.CompareTag("Player"))
         {
             Instantiate(effect, transform.position, transform.rotation);
-            player.Heal(healAmount);
+            player.ChangeWeapon(weaponToEquip);
             Destroy(gameObject);
         }
     }
