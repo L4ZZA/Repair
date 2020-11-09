@@ -17,12 +17,12 @@ public class BossSounds : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.deltaTime >= nextSoundEffectTime)
+        if(Time.time >= nextSoundEffectTime)
         {
             int randomIndex = Random.Range(0, clips.Length);
             audioSource.clip = clips[randomIndex];
             audioSource.Play();
-            nextSoundEffectTime = Time.deltaTime + timeBtwSounds;
+            nextSoundEffectTime = Time.time + timeBtwSounds;
         }
     }
 }
