@@ -3462,7 +3462,7 @@ MonoBehaviour:
   - {fileID: 847074534}
   - {fileID: 1911186580}
   timeBtwWaves: 3
-  boss: {fileID: 1183662599149140, guid: 561fbf8cbf4443948bee9ecb3ffdbd85, type: 3}
+  boss: {fileID: 1183662599149140, guid: f187eb3a56977b647aaca8dc4a87e0ba, type: 3}
   bossSpawnPoint: {fileID: 1867025766}
 --- !u!115 &1758957669
 MonoScript:

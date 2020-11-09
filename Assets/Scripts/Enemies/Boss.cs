@@ -10,6 +10,7 @@ public class Boss : MonoBehaviour
     public int damage;
     public GameObject blood;
     public GameObject deathEffect;
+    public GameObject figure;
 
     int halfHealth;
     Animator anim;
@@ -26,7 +27,7 @@ public class Boss : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             var player = collision.GetComponent<Player>();
-            if(player)
+            if(player && figure.activeInHierarchy)
                 player.TakeDamage(damage);
         }
     }
