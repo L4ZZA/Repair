@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Boss : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Boss : MonoBehaviour
     public GameObject blood;
     public GameObject deathEffect;
     public GameObject figure;
+    public HealthBar healthBar;
 
     int halfHealth;
     Animator anim;
@@ -20,6 +22,8 @@ public class Boss : MonoBehaviour
     {
         halfHealth = health >> 1;
         anim = GetComponent<Animator>();
+        healthBar.gameObject.SetActive(true);
+        healthBar.SetMaxHealth(health);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -35,12 +39,14 @@ public class Boss : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         health -= damageAmount;
+        healthBar.SetHealth(health);
 
         if(health <= 0)
         {
             Instantiate(blood, transform.position, transform.rotation);
             Instantiate(deathEffect, transform.position, transform.rotation);
             Destroy(gameObject);
+            healthBar.gameObject.SetActive(false);
         }
 
         if(health <= halfHealth)
