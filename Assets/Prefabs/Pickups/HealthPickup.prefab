@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bebd4efca0ebaa4ca05dd15e6d722fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 0
+  lifeTime: 10
   effect: {fileID: 1761433749851248, guid: 9bfd7f35f41c4754eb587afc4130c4d3, type: 3}
   healAmount: 1
 --- !u!82 &82991258183209804
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8566c0d4ee6b6b844b15ab95449f8696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 7
+  lifeTime: 10
 --- !u!114 &5736481386735146815
 MonoBehaviour:
   m_ObjectHideFlags: 0

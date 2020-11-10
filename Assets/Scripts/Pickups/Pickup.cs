@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
+    // if lifetime is set to 0 the pickup will not self-destroy
     public float lifeTime;
-
     public GameObject effect;
 
-    float lifeTimePassed = 0f;
     const float blinkStartTime = 3f;
+    float lifeTimePassed = 0f;
     protected Player player;
     Blink blinkEffect;
 
@@ -33,10 +33,6 @@ public class Pickup : MonoBehaviour
                 blinkEffect.DoBlink();
             }
 
-        }
-        else
-        {
-            blinkEffect.DoBlink();
         }
     }
 }
